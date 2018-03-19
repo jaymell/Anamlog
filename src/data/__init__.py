@@ -81,7 +81,7 @@ class ELBLog:
       if i not in src:
         logger.error("%s field not in record" % i)
         raise ELBLogCreationException
-        setattr(self, i, src[i])
+      setattr(self, i, src[i])
 
 
 def contains_bad_chars(it):
@@ -151,9 +151,10 @@ def get_elb_logs(gen):
   for i in gen:
     cleaned_record = sanitize_fields(i['_source'])
     try:
-      yield ELBLog(cleaned_record)
+      log = ELBLog(cleaned_record)
+      yield log
     except ELBLogCreationException:
-      print("Failed to create record: ", i)
+      logger.error("Failed to create record: ", i)
       continue
 
 
