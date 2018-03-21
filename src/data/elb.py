@@ -36,18 +36,21 @@ class ELBLog:
   final_fields = {
     'received_bytes': 'float',
     'bytes': 'float',
+    # 'timestamp': 'float',
     'verb': 'string',
     'response_processing_time': 'float',
     'path': 'string',
     'request_processing_time': 'float',
     'response': 'string',
     'urihost': 'string',
-    'elb': 'string',
+    # 'elb': 'string',
     'backend_processing_time': 'float',
     'second_sin': 'float',
     'second_cos': 'float',
     'month_sin': 'float',
     'month_cos': 'float',
+    'dow_sin': 'float',
+    'dow_cos': 'float'
   }
 
   @property
@@ -61,10 +64,13 @@ class ELBLog:
     self._timestamp = t.timestamp()
     sec = seconds_since_midnight(t)
     month = t.month
+    dow = t.weekday()
     self.second_sin = second_sin(sec)
     self.second_cos = second_cos(sec)
     self.month_sin = month_sin(month)
     self.month_cos = month_cos(month)
+    self.dow_sin = dow_sin(dow)
+    self.dow_cos = dow_cos(dow)
 
   @property
   def path(self):

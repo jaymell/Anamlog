@@ -23,8 +23,3 @@ load actual data in batches, cast to dataframe
 
 get probabilities
 
-
-##########
-from train import *
-training_set  = get_training_set()
-df = training_set.get_array()

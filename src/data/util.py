@@ -15,6 +15,8 @@ second_sin = lambda s: np.sin(2*np.pi*s/seconds_in_day)
 second_cos = lambda s: np.cos(2*np.pi*s/seconds_in_day)
 month_sin = lambda m: np.sin(2*np.pi*m/12)
 month_cos = lambda m: np.cos(2*np.pi*m/12)
+dow_sin = lambda d: np.sin(2*np.pi*d/7)
+dow_cos = lambda d: np.cos(2*np.pi*d/7)
 seconds_since_midnight = lambda t: (t - t.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
 
 
@@ -82,10 +84,11 @@ def write_to_disk(gen, file):
 
 def write_json_to_disk(gen, file):
   with open(file, 'w') as f:
-    json.dump([ i for i in gen ], f)
+    for i in gen:
+      json.dump(i, f)
 
 
-def sample_from_disk(file, sample_size):
+def sample_df_from_disk(file, sample_size):
   n = sum(1 for line in open(file)) - 1 #number of records in file (excludes header)
   skip = sorted(random.sample(range(1,n+1),n-sample_size))
   return pd.read_csv(file, skiprows=skip)
