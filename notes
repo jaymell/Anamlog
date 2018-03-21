@@ -1,0 +1,30 @@
+raw json -> persist to disk
+strip everything but ['_source'] fro json
+sanitize field names -- ie, '@timestamp' becomes 'timestamp'
+
+data at this point should be convertable to ELBLog object, or
+  at least pass a basic schema validation
+
+put this initial data into dataset
+
+try to find way to encode / properly bucket / create time vars
+remove zero colummns
+remove correlated fields
+
+condense insights from above into a schema
+
+build new dataframe from this schema
+
+recursively do this until it looks 'good'?
+
+with final training set, calculate mu and sigma
+
+load actual data in batches, cast to dataframe
+
+get probabilities
+
+
+##########
+from train import *
+training_set  = get_training_set()
+df = training_set.get_array()

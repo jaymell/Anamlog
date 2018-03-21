@@ -2,9 +2,14 @@ from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 import datetime
 import json
-from . import *
+import logging
 
-def get_records(url, index_pattern, n_mins_ago=None):
+from .util import *
+
+logger = logging.getLogger(__name__)
+
+
+def get_elasticsearch_records(url, index_pattern, n_mins_ago=None):
   """ return generator """
 
   es = Elasticsearch(url, verify_certs=False)
